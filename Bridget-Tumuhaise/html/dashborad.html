@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Purchases Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../public/css/style.css"></script>
+  </head>
+
+  <body>
+    <div class="max-w-7xl mx-auto p-6">
+      <!-- TOP SECTION -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- LEFT -->
+        <div>
+          <!-- SALES + ORDERS -->
+          <div class="bg-white rounded border p-10 h-[220px]">
+            <div class="grid grid-cols-2 h-full">
+              <div class="flex flex-col justify-center">
+                <h1 id="salesValue" class="text-4xl font-bold">
+                  UGX 50,000,000
+                </h1>
+
+                <p class="text-gray-500 text-xl">Sales</p>
+              </div>
+
+              <div class="border-l pl-10 flex flex-col justify-center">
+                <h1 id="ordersValue" class="text-4xl font-bold">
+                  UGX 15,000,000
+                </h1>
+
+                <p class="text-gray-500 text-xl">Orders</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STOCK -->
+          <div class="grid grid-cols-2 gap-6 mt-6">
+            <div class="bg-white rounded border p-10">
+              <h1 id="stockValue" class="text-4xl font-bold text-green-500">
+                UGX 42,000,000
+              </h1>
+
+              <p class="text-gray-500 text-xl">In stock</p>
+            </div>
+
+            <div class="bg-white rounded border p-10">
+              <h1 id="outStockValue" class="text-4xl font-bold text-red-500">
+                5
+              </h1>
+
+              <p class="text-gray-500 text-xl">Out of stock</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="bg-white rounded border p-6">
+          <h1 class="text-3xl font-semibold mb-4">Add Product</h1>
+
+          <!-- SUCCESS -->
+          <div
+            id="successMsg"
+            class="hidden bg-green-500 text-white p-3 mb-4 flex justify-between"
+          >
+            <span> Product has been added successfully! </span>
+
+            <span>X</span>
+          </div>
+
+          <!-- FORM -->
+          <form id="productForm">
+            <div class="space-y-4">
+              <input
+                type="text"
+                id="productName"
+                placeholder="Product Name"
+                class="w-full border p-3 outline-none"
+              />
+
+              <input
+                type="text"
+                id="category"
+                placeholder="Category"
+                class="w-full border p-3 outline-none"
+              />
+
+              <input
+                type="number"
+                id="price"
+                placeholder="Price"
+                class="w-full border p-3 outline-none"
+              />
+
+              <input
+                type="number"
+                id="quantity"
+                placeholder="Quantity"
+                class="w-full border p-3 outline-none"
+              />
+
+              <div class="grid grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  id="color"
+                  placeholder="Color"
+                  class="w-full border p-3 outline-none"
+                />
+
+                <input
+                  type="file"
+                  id="image"
+                  class="w-full border p-3 outline-none"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <button
+                  id="saveBtn"
+                  type="submit"
+                  class="bg-orange-500 hover:bg-orange-600 text-white py-3 font-bold rounded"
+                >
+                  SAVE
+                </button>
+
+                <button
+                  id="clearBtn"
+                  type="submit"
+                  class="bg-gray-300 hover:bg-gray-400 py-3 font-bold rounded"
+                >
+                  CLEAR
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="mt-8 overflow-auto">
+        <table class="w-full bg-white">
+          <thead class="bg-black text-white">
+            <tr>
+              <th class="p-3">ID</th>
+              <th class="p-3">NAME</th>
+              <th class="p-3">CATEGORY</th>
+              <th class="p-3">PRICE(UGX)</th>
+              <th class="p-3">QUANTITY</th>
+              <th class="p-3">COLOR</th>
+              <th class="p-3">IMAGE</th>
+            </tr>
+          </thead>
+
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="../public/js/dashboard.js"></script>
+  </body>
+</html>
