@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const Product = require("../models/Product");
 
 // Image upload configurations
 let storage = multer.diskStorage({
@@ -18,16 +19,12 @@ router.get("/", (req, res) => {
 });
 
 router.get("/dashboard", async (req, res) => {
-  res.render("dashboard");
-});
-
-router.get("/dashboard", async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
-    console.log(products);
     res.render("dashboard", { products });
   } catch (error) {
     console.error(error.message);
+    res.render("dashboard", { products: [] });
   }
 });
 

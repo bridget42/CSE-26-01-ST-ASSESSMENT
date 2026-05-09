@@ -4,7 +4,7 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   title Purchases Dashboard
   script(src='https://cdn.tailwindcss.com')
-  script(src='../public/css/style.css')
+  link(rel='stylesheet' href='/css/style.css')
 .max-w-7xl.mx-auto.p-6
   // TOP SECTION
   .grid.grid-cols-1.gap-8(class='lg:grid-cols-2')
@@ -41,17 +41,29 @@ head
       // FORM
       form#productForm(action='/dashboard' method='POST' enctype="multipart/form-data")
         .space-y-4
-          input#productName.w-full.border.p-3.outline-none(type='text' name='productName' placeholder='Product Name')
-          input#category.w-full.border.p-3.outline-none(type='text' name='category' placeholder='Category')
-          input#price.w-full.border.p-3.outline-none(type='number' name='price'  placeholder='Price')
-          input#quantity.w-full.border.p-3.outline-none(type='number' name='quantity'  placeholder='Quantity')
+          .space-y-1
+            input#productName.w-full.border.p-3.outline-none(type='text' name='productName' placeholder='Product Name')
+            span#productNameError.text-sm.text-red-500.hidden
+          .space-y-1
+            input#category.w-full.border.p-3.outline-none(type='text' name='category' placeholder='Category')
+            span#categoryError.text-sm.text-red-500.hidden
+          .space-y-1
+            input#price.w-full.border.p-3.outline-none(type='number' name='price'  placeholder='Price')
+            span#priceError.text-sm.text-red-500.hidden
+          .space-y-1
+            input#quantity.w-full.border.p-3.outline-none(type='number' name='quantity'  placeholder='Quantity')
+            span#quantityError.text-sm.text-red-500.hidden
           .grid.grid-cols-2.gap-4
-            input#color.w-full.border.p-3.outline-none(type='text' name='color'  placeholder='Color')
-            input#image.w-full.border.p-3.outline-none(type='file' name='image' )
+            .space-y-1
+              input#color.w-full.border.p-3.outline-none(type='text' name='color'  placeholder='Color')
+              span#colorError.text-sm.text-red-500.hidden
+            .space-y-1
+              input#image.w-full.border.p-3.outline-none(type='file' name='image')
+              span#imageError.text-sm.text-red-500.hidden
           .grid.grid-cols-2.gap-4
             button#saveBtn.bg-orange-500.text-white.py-3.font-bold.rounded(type='submit' class='hover:bg-orange-600')
               | SAVE
-            button#clearBtn.bg-gray-300.py-3.font-bold.rounded(type='submit' class='hover:bg-gray-400')
+            button#clearBtn.bg-gray-300.py-3.font-bold.rounded(type='button' class='hover:bg-gray-400')
               | CLEAR
   // TABLE
   .mt-8.overflow-auto
@@ -63,5 +75,17 @@ head
           th.p-3 CATEGORY
           th.p-3 PRICE(UGX)
           th.p-3 QUANTITY
-      tbody#tableBody
+      if products && products.length
+        tbody#tableBody
+          each product, index in products
+            tr.border-b
+              td.p-3 #{index + 1}
+              td.p-3 #{product.productName}
+              td.p-3 #{product.category}
+              td.p-3 UGX #{product.price}
+              td.p-3 #{product.quantity}
+      else
+        tbody#tableBody
+          tr
+            td(colspan='5').p-3.text-center No products available yet.
 script(src='/js/dashboard.js')
